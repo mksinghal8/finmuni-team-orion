@@ -167,7 +167,7 @@ const ECommerce: React.FC = () => {
           <TableOne />
         </div>
         <div className="col-span-4 xl:col-span-4">
-          {selectedSeriesData && <ChartThree data={selectedSeriesData} />}
+          {selectedSeriesData ? <ChartThree data={selectedSeriesData}/> : <ChatCard />}
         </div>
         <ChatCard/>
       </div>
