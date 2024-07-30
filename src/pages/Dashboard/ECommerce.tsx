@@ -8,13 +8,18 @@ import MapOne from '../../components/Maps/MapOne';
 import TableOne from '../../components/Tables/TableOne';
 import data from '../../assets/data.json';
 
+type SeriesData = {
+  [key: string]: number[];
+};
+
 const ECommerce: React.FC = () => {
   const [totals, setTotals] = useState<{ [key: string]: number }>({});
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
 
   useEffect(() => {
     if (Array.isArray(data.data)) {
       setTotals(calculateTotals(data.data));
-    } 
+    }
   }, []);
 
   const calculateTotals = (data: any[]) => {
@@ -26,10 +31,32 @@ const ECommerce: React.FC = () => {
       return totals;
     }, {});
   };
+
+  // Define series data for each card
+  const seriesData: SeriesData = {
+    Bills: [10, 20, 30, 40], // Example data
+    Education: [15, 25, 35, 45], // Example data
+    Health: [20, 30, 40, 50], // Example data
+    Fitness: [5, 15, 25, 35], // Example data
+  };
+
+  const handleCardClick = (title: string) => {
+    setSelectedCard(title);
+  };
+
+  // Ensure `selectedCard` is a valid key in `seriesData`
+  const selectedSeriesData = selectedCard ? seriesData[selectedCard as keyof SeriesData] : undefined;
+
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Bills" total={`$${(totals.Bills || 0).toFixed(2)}K`} rate="0.43%" levelUp>
+      <CardDataStats
+          title="Bills"
+          total={`$${(totals.Bills || 0).toFixed(2)}K`}
+          rate="0.43%"
+          levelUp
+          onClick={() => handleCardClick('Bills')}
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -48,7 +75,13 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Education" total={`$${(totals.Education || 0).toFixed(2)}K`} rate="4.35%" levelUp>
+        <CardDataStats
+          title="Education"
+          total={`$${(totals.Education || 0).toFixed(2)}K`}
+          rate="4.35%"
+          levelUp
+          onClick={() => handleCardClick('Education')}
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="20"
@@ -71,7 +104,13 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Health" total={`$${(totals.Health || 0).toFixed(2)}K`} rate="2.59%" levelUp>
+        <CardDataStats
+          title="Health"
+          total={`$${(totals.Health || 0).toFixed(2)}K`}
+          rate="2.59%"
+          levelUp
+          onClick={() => handleCardClick('Health')}
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -90,7 +129,13 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Fitness" total={`$${(totals.Fitness || 0).toFixed(2)}K`} rate="0.95%" levelDown>
+        <CardDataStats
+          title="Fitness"
+          total={`$${(totals.Fitness || 0).toFixed(2)}K`}
+          rate="0.95%"
+          levelDown
+          onClick={() => handleCardClick('Fitness')}
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -116,9 +161,11 @@ const ECommerce: React.FC = () => {
       </div>
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+        {selectedSeriesData && (
+          <ChartThree data={selectedSeriesData} />
+        )}
         <ChartOne />
         <ChartTwo />
-        <ChartThree />
         <MapOne />
         <div className="col-span-12 xl:col-span-8">
           <TableOne />
