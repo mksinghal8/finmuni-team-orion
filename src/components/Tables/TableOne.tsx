@@ -64,7 +64,7 @@ const TableOne = () => {
         <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-6">
           <div className="p-2.5 xl:p-3">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Transaction
+              Merchant
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-3">
@@ -113,11 +113,11 @@ const TableOne = () => {
             </div>
 
             <div className="flex items-center justify-center p-1.5 xl:p-3">
-              <p className="text-black dark:text-white">{brand.visitors}K</p>
+              <p className="text-black dark:text-white">${brand.revenues}K</p>
             </div>
 
             <div className="flex items-center justify-center p-1.5 xl:p-3">
-              <p className="text-meta-3">${brand.revenues}</p>
+              <p className="text-meta-3">{brand.visitors}</p>
             </div>
 
             <div className="hidden items-center justify-center p-1.5 sm:flex xl:p-3">
@@ -133,6 +133,7 @@ const TableOne = () => {
             </div>
           </div>
         ))}
+        
       </div>
     </div>
   );

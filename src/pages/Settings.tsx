@@ -56,8 +56,8 @@ const Settings = () => {
                           type="text"
                           name="fullName"
                           id="fullName"
-                          placeholder="Devid Jhon"
-                          defaultValue="Devid Jhon"
+                          placeholder="Vikas Sharma"
+                          defaultValue="Vikas Sharma"
                         />
                       </div>
                     </div>
