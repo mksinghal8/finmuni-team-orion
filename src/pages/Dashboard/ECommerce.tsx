@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CardDataStats from '../../components/CardDataStats';
 import ChartOne from '../../components/Charts/ChartOne';
 import ChartThree from '../../components/Charts/ChartThree';
@@ -6,12 +6,59 @@ import ChartTwo from '../../components/Charts/ChartTwo';
 import ChatCard from '../../components/Chat/ChatCard';
 import MapOne from '../../components/Maps/MapOne';
 import TableOne from '../../components/Tables/TableOne';
+import data from '../../assets/data.json';
+
+type SeriesData = {
+  [key: string]: number[];
+};
 
 const ECommerce: React.FC = () => {
+  const [totals, setTotals] = useState<{ [key: string]: number }>({});
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (Array.isArray(data.data)) {
+      setTotals(calculateTotals(data.data));
+    }
+  }, []);
+
+  const calculateTotals = (data: any[]) => {
+    return data.reduce((totals: { [key: string]: number }, item: any) => {
+      if (!totals[item.transactionNarrative]) {
+        totals[item.transactionNarrative] = 0;
+      }
+      totals[item.transactionNarrative] += item.amount;
+      return totals;
+    }, {});
+  };
+
+  // Define series data for each card
+  const seriesData: SeriesData = {
+    Bills: [10, 20, 30, 40], // Example data
+    Education: [15, 25, 35, 45], // Example data
+    Health: [20, 30, 40, 50], // Example data
+    Fitness: [5, 15, 25, 35], // Example data
+  };
+
+  const handleCardClick = (title: string) => {
+    setSelectedCard(title);
+  };
+
+  // Ensure `selectedCard` is a valid key in `seriesData`
+  const selectedSeriesData = selectedCard
+    ? seriesData[selectedCard as keyof SeriesData]
+    : undefined;
+
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Total views" total="$3.456K" rate="0.43%" levelUp>
+        <CardDataStats
+          title="Bills"
+          total={`$${(totals.Bills || 0).toFixed(2)}K`}
+          rate="0.43%"
+          levelUp
+          onClick={() => handleCardClick('Bills')}
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -30,7 +77,13 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Profit" total="$45,2K" rate="4.35%" levelUp>
+        <CardDataStats
+          title="Education"
+          total={`$${(totals.Education || 0).toFixed(2)}K`}
+          rate="4.35%"
+          levelUp
+          onClick={() => handleCardClick('Education')}
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="20"
@@ -53,7 +106,13 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Product" total="2.450" rate="2.59%" levelUp>
+        <CardDataStats
+          title="Health"
+          total={`$${(totals.Health || 0).toFixed(2)}K`}
+          rate="2.59%"
+          levelUp
+          onClick={() => handleCardClick('Health')}
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -72,7 +131,13 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Users" total="3.456" rate="0.95%" levelDown>
+        <CardDataStats
+          title="Fitness"
+          total={`$${(totals.Fitness || 0).toFixed(2)}K`}
+          rate="0.95%"
+          levelDown
+          onClick={() => handleCardClick('Fitness')}
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -98,14 +163,13 @@ const ECommerce: React.FC = () => {
       </div>
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <ChartOne />
-        {/* <ChartTwo /> */}
-        <ChatCard />
-        {/* <ChartThree /> */}
-        <div className="col-span-12 xl:col-span-8">
+        <div className="col-span-8 xl:col-span-8">
           <TableOne />
         </div>
-        
+        <div className="col-span-4 xl:col-span-4">
+          {selectedSeriesData && <ChartThree data={selectedSeriesData} />}
+        </div>
+        <ChatCard/>
       </div>
     </>
   );

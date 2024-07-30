@@ -7,6 +7,7 @@ interface CardDataStatsProps {
   levelUp?: boolean;
   levelDown?: boolean;
   children: ReactNode;
+  onClick?: () => void; // New prop
 }
 
 const CardDataStats: React.FC<CardDataStatsProps> = ({
@@ -16,9 +17,13 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
   levelUp,
   levelDown,
   children,
+  onClick, // New prop
 }) => {
   return (
-    <div className="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div
+      className="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default hover:bg-slate-50 dark:border-strokedark dark:bg-boxdark cursor-pointer"
+      onClick={onClick} // Handle click
+    >
       <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
         {children}
       </div>
