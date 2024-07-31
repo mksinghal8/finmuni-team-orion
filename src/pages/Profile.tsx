@@ -11,6 +11,52 @@ import VirtualCard from '../components/VirtualCard/VirtualCard';
 import AddCardForm from '../components/VirtualCard/AddCardForm';
 import { card } from '../types/customTypes/customTypes';
 
+import BrandOne from "../images/brand/brand-01.svg"
+
+const brandData = [
+ 
+    {
+      logo: BrandOne,
+      merchantName: "School",
+      amount: 150.70,
+      date: "24-07-2024",
+      carbonEmission: 23.57,
+      transactionType: "Education",
+    },
+    {
+      logo: BrandOne,
+      merchantName: "Education Provider",
+      amount: 150.70,
+      date: "24-07-2024",
+      carbonEmission: 23.57,
+      transactionType: "Education",
+    },
+    {
+      logo: BrandOne,
+      merchantName: "BookStore",
+      amount: 150.70,
+      date: "24-07-2024",
+      carbonEmission: 23.57,
+      transactionType: "Education",
+    },
+    {
+      logo: BrandOne,
+      merchantName: "Tution Center",
+      amount: 150.70,
+      date: "24-07-2024",
+      carbonEmission: 23.57,
+      transactionType: "Education",
+    },
+    {
+      logo: BrandOne,
+      merchantName: "Online Learning Platform",
+      amount: 150.70,
+      date: "24-07-2024",
+      carbonEmission: 23.57,
+      transactionType: "Education",
+    }
+  ]
+
 const Profile = () => {
   const imageURL = [
     'https://st4.depositphotos.com/29108198/31538/v/450/depositphotos_315382906-stock-illustration-red-abstract-background-gradient-vector.jpg',
@@ -97,18 +143,18 @@ const Profile = () => {
             </div>
           </div> */}
 
-          <button
+          {/* <button
             className="self-start px-4 py-2 bg-blue-600 text-white rounded mt-16"
             onClick={openModal}
           >
             Add Card
-          </button>
+          </button> */}
         </div>
       </div>
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
         <div className="col-span-12 xl:col-span-12">
-          <TableOne />
+          <TableOne brandData={brandData || []} showButton= {true} onClick={openModal}/>
         </div>
         {/* <ChartTwo /> */}
       </div>

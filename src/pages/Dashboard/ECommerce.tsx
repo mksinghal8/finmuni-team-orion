@@ -7,6 +7,11 @@ import ChatCard from '../../components/Chat/ChatCard';
 import MapOne from '../../components/Maps/MapOne';
 import TableOne from '../../components/Tables/TableOne';
 import data from '../../assets/data.json';
+import BrandOne from "../../images/brand/brand-01.svg"
+import BrandTwo from '../../images/brand/brand-02.svg';
+import BrandThree from '../../images/brand/brand-03.svg';
+import BrandFour from '../../images/brand/brand-04.svg';
+import BrandFive from '../../images/brand/brand-05.svg';
 
 type SeriesData = {
   [key: string]: number[];
@@ -34,6 +39,169 @@ const ECommerce: React.FC = () => {
       totals[item.category.merchantCategory1Name] += item.amount;
       return totals;
     }, {});
+  };
+
+  const brandData: { [key: string]: any[] } = {
+    Bills: [
+      {
+        logo: BrandOne,
+        merchantName: "Electricity Provider1",
+        amount: 150.70,
+        date: "24-07-2024",
+        carbonEmission: 23.57,
+        transactionType: "Bills",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Health Insurance",
+        amount: 150.70,
+        date: "24-07-2024",
+        carbonEmission: 13.57,
+        transactionType: "Bills",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Investment company",
+        amount: 150.70,
+        date: "24-07-2024",
+        carbonEmission: 50.57,
+        transactionType: "Bills",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Phone Company",
+        amount: 150.70,
+        date: "24-07-2024",
+        carbonEmission: 15.5,
+        transactionType: "Bills",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Grocery Store",
+        amount: 150.70,
+        date: "24-07-2024",
+        carbonEmission: 19.57,
+        transactionType: "Bills",
+      }
+    ],
+    Entertainment: [
+      {
+        logo: BrandOne,
+        merchantName: "Clothing Store",
+        amount: 450.70,
+        date: "24-07-2024",
+        carbonEmission: 3.57,
+        transactionType: "Entertainment",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Restaurant",
+        amount: 650.70,
+        date: "24-07-2024",
+        carbonEmission: 30.57,
+        transactionType: "Entertainment",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Gym",
+        amount: 950.70,
+        date: "24-07-2024",
+        carbonEmission: 90.57,
+        transactionType: "Entertainment",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Streaming Services",
+        amount: 556,
+        date: "24-07-2024",
+        carbonEmission: 78.57,
+        transactionType: "Entertainment",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "NightOut",
+        amount: 350.70,
+        date: "24-07-2024",
+        carbonEmission: 89.57,
+        transactionType: "Entertainment",
+      }
+    ],
+    Education: [
+      {
+        logo: BrandOne,
+        merchantName: "School",
+        amount: 100.70,
+        date: "28-07-2024",
+        carbonEmission: 23.57,
+        transactionType: "Education",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Education Provider",
+        amount: 250.70,
+        date: "16-07-2024",
+        carbonEmission: 70.57,
+        transactionType: "Education",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "BookStore",
+        amount: 1500,
+        date: "24-07-2024",
+        carbonEmission: 65.57,
+        transactionType: "Education",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Tution Center",
+        amount: 2740,
+        date: "4-07-2024",
+        carbonEmission: 40.57,
+        transactionType: "Education",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Online Learning Platform",
+        amount: 9000,
+        date: "8-07-2024",
+        carbonEmission: 23.57,
+        transactionType: "Education",
+      }
+    ],
+    Health: [
+      {
+        logo: BrandOne,
+        merchantName: "Clinic",
+        amount: 2150.70,
+        date: "14-07-2024",
+        carbonEmission: 12.97,
+        transactionType: "Health",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Insurance Company",
+        amount: 3950.70,
+        date: "21-03-2024",
+        carbonEmission: 63.47,
+        transactionType: "Health",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Pharmacy",
+        amount: 4150.70,
+        date: "8-07-2024",
+        carbonEmission: 45,
+        transactionType: "Health",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Hospital",
+        amount: 150.70,
+        date: "9-03-2024",
+        carbonEmission: 8.57,
+        transactionType: "Health",
+      }
+    ],
   };
 
   // Define series data for each card
@@ -83,7 +251,7 @@ const ECommerce: React.FC = () => {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         <CardDataStats
           title="Bills"
-          total={`$${(totals.Bills || 0).toFixed(2)}K`}
+          total={`£${(totals.Bills || 0).toFixed(2)}K`}
           rate="0.43%"
           levelUp
           onClick={() => handleCardClick('Bills')}
@@ -137,7 +305,7 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
         <CardDataStats
           title="Education"
-          total={`$${(totals.Education|| 0).toFixed(2)}K`}
+          total={`£${(totals.Education|| 0).toFixed(2)}K`}
           rate="2.59%"
           levelUp
           onClick={() => handleCardClick('Education')}
@@ -162,7 +330,7 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
         <CardDataStats
           title="Health"
-          total={`$${(totals.Health || 0).toFixed(2)}K`}
+          total={`£${(totals.Health || 0).toFixed(2)}K`}
           rate="0.95%"
           levelDown
           onClick={() => handleCardClick('Health')}
@@ -198,7 +366,7 @@ const ECommerce: React.FC = () => {
         </div>
         <ChatCard/>
         <div className="col-span-8 xl:col-span-12">
-          <TableOne />
+          <TableOne brandData={brandData[selectedCard2] || []} showButton= {false} onClick={()=>{}}/>
         </div>
         
       </div>
