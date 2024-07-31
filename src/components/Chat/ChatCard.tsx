@@ -38,23 +38,23 @@ const chatData: Chat[] = [
     time: 32,
     textCount: 2,
     color: '#FFBA00',
-  },
-  {
-    avatar: UserOne,
-    name: 'Jhon Doe',
-    text: 'How are you?',
-    time: 32,
-    textCount: 0,
-    color: '#10B981',
-  },
-  {
-    avatar: UserThree,
-    name: 'Jhon Doe',
-    text: 'How are you?',
-    time: 32,
-    textCount: 3,
-    color: '#FFBA00',
-  },
+  }
+  // {
+  //   avatar: UserOne,
+  //   name: 'Jhon Doe',
+  //   text: 'How are you?',
+  //   time: 32,
+  //   textCount: 0,
+  //   color: '#10B981',
+  // },
+  // {
+  //   avatar: UserThree,
+  //   name: 'Jhon Doe',
+  //   text: 'How are you?',
+  //   time: 32,
+  //   textCount: 3,
+  //   color: '#FFBA00',
+  // },
 ];
 
 const ChatCard = () => {

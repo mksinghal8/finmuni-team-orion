@@ -122,7 +122,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </li>
               {/* <!-- Menu Item Calendar --> */}
               {/* <!-- Menu Item Settings --> */}
-              <li>
+              {/* <li>
                 <NavLink
                   to="/settings"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-blue-800 duration-300 ease-in-out hover:bg-zinc-200 dark:hover:bg-meta-4 ${
@@ -142,7 +142,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   </svg>
                   My Banks
                 </NavLink>
-              </li>
+              </li> */}
 
               {/* <!-- Menu Item Profile --> */}
               <li>
@@ -170,7 +170,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Profile --> */}
 
               {/* <!-- Menu Item Tables --> */}
-              <li>
+              {/* <li>
                 <NavLink
                   to="/tables"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-blue-800 duration-300 ease-in-out hover:bg-zinc-200 dark:hover:bg-meta-4 ${
@@ -205,7 +205,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   </svg>
                   Transactions
                 </NavLink>
-              </li>
+              </li> */}
               {/* <!-- Menu Item Tables --> */}
 
               

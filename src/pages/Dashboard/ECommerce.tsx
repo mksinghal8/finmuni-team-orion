@@ -12,10 +12,14 @@ type SeriesData = {
   [key: string]: number[];
 };
 
+type CategoriesData = {
+  [key: string]: string[];
+};
+
 const ECommerce: React.FC = () => {
   const [totals, setTotals] = useState<{ [key: string]: number }>({});
-  const [selectedCard, setSelectedCard] = useState<string | null>(null);
-
+  const [selectedCard2, setSelectedCard2] = useState<string>("");
+  const [selectedCard3, setSelectedCard3] = useState<string>("");
   useEffect(() => {
     if (Array.isArray(data.data)) {
       setTotals(calculateTotals(data.data));
@@ -24,30 +28,55 @@ const ECommerce: React.FC = () => {
 
   const calculateTotals = (data: any[]) => {
     return data.reduce((totals: { [key: string]: number }, item: any) => {
-      if (!totals[item.transactionNarrative]) {
-        totals[item.transactionNarrative] = 0;
+      if (!totals[item.category.merchantCategory1Name]) {
+        totals[item.category.merchantCategory1Name] = 0;
       }
-      totals[item.transactionNarrative] += item.amount;
+      totals[item.category.merchantCategory1Name] += item.amount;
       return totals;
     }, {});
   };
 
   // Define series data for each card
-  const seriesData: SeriesData = {
-    Bills: [10, 20, 30, 40], // Example data
-    Education: [15, 25, 35, 45], // Example data
-    Health: [20, 30, 40, 50], // Example data
-    Fitness: [5, 15, 25, 35], // Example data
+  const seriesData2: SeriesData = {
+    Bills: [60, 40], // Example data
+    Entertainment: [25, 75], // Example data
+    Education: [20, 30, 40, 50], // Example data
+    Health: [5, 15, 25, 35], // Example data
   };
 
+  const seriesData3: SeriesData = {
+    Bills: [30, 10, 20, 40], // Example data
+    Entertainment: [25, 25, 35, 15], // Example data
+    Education: [30, 20, 40, 10], // Example data
+    Health: [35, 25, 20] // Example data
+  };
+
+  const merchantcategories2: CategoriesData ={
+    Bills: ["Utilities", "Equity"],
+    Entertainment: ["LifeStyle", "NightLife"], 
+    Education: ["Learning", "Professional Development", "Training", "Tutoring"], // Example data
+    Health: ["HealthCare", "Health Insurance", "Medical Checkups", "Prevention Care"], // Example data
+  }
+  const merchantcategories3: CategoriesData ={
+    Bills: ["Water", "Internet", "Electricity bill", "Rent"],
+    Entertainment: ["Gym", "Dining", "Streaming", "Apparel"], 
+    Education: ["Online Courses", "Books", "School Fee", "Tution Fee"], // Example data
+    Health: ["Medicines", "Hospital bill", "Doctor fee"], // Example data
+  }
+
   const handleCardClick = (title: string) => {
-    setSelectedCard(title);
+    setSelectedCard2(title);
+    setSelectedCard3(title)
   };
 
   // Ensure `selectedCard` is a valid key in `seriesData`
-  const selectedSeriesData = selectedCard
-    ? seriesData[selectedCard as keyof SeriesData]
+  const selectedSeriesData2 = selectedCard2
+    ? seriesData2[selectedCard2 as keyof SeriesData]
     : undefined;
+  const selectedSeriesData3 = selectedCard3
+    ? seriesData3[selectedCard3 as keyof SeriesData]
+    : undefined;
+  
 
   return (
     <>
@@ -78,11 +107,11 @@ const ECommerce: React.FC = () => {
           </svg>
         </CardDataStats>
         <CardDataStats
-          title="Education"
-          total={`$${(totals.Education || 0).toFixed(2)}K`}
+          title="Entertainment"
+          total={`£${(totals.Entertainment || 0).toFixed(2)}K`}
           rate="4.35%"
           levelUp
-          onClick={() => handleCardClick('Education')}
+          onClick={() => handleCardClick('Entertainment')}
         >
           <svg
             className="fill-primary dark:fill-white"
@@ -107,11 +136,11 @@ const ECommerce: React.FC = () => {
           </svg>
         </CardDataStats>
         <CardDataStats
-          title="Health"
-          total={`$${(totals.Health || 0).toFixed(2)}K`}
+          title="Education"
+          total={`$${(totals.Education|| 0).toFixed(2)}K`}
           rate="2.59%"
           levelUp
-          onClick={() => handleCardClick('Health')}
+          onClick={() => handleCardClick('Education')}
         >
           <svg
             className="fill-primary dark:fill-white"
@@ -132,11 +161,11 @@ const ECommerce: React.FC = () => {
           </svg>
         </CardDataStats>
         <CardDataStats
-          title="Fitness"
-          total={`$${(totals.Fitness || 0).toFixed(2)}K`}
+          title="Health"
+          total={`$${(totals.Health || 0).toFixed(2)}K`}
           rate="0.95%"
           levelDown
-          onClick={() => handleCardClick('Fitness')}
+          onClick={() => handleCardClick('Health')}
         >
           <svg
             className="fill-primary dark:fill-white"
@@ -163,13 +192,15 @@ const ECommerce: React.FC = () => {
       </div>
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+       
         <div className="col-span-8 xl:col-span-8">
-          <TableOne />
-        </div>
-        <div className="col-span-4 xl:col-span-4">
-          {selectedSeriesData ? <ChartThree data={selectedSeriesData}/> : <ChatCard />}
+          {(selectedSeriesData2 && selectedSeriesData3) ? <ChartThree data2={selectedSeriesData2} data3={selectedSeriesData3} selectedCard = {selectedCard2} category2={merchantcategories2[selectedCard2]} category3={merchantcategories3[selectedCard3]} /> : <ChatCard />}
         </div>
         <ChatCard/>
+        <div className="col-span-8 xl:col-span-12">
+          <TableOne />
+        </div>
+        
       </div>
     </>
   );
