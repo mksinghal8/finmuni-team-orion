@@ -62,8 +62,8 @@ const AddCardForm: React.FC = () => {
               type="text"
               name="phoneNumber"
               id="phoneNumber"
-              placeholder="Education"
-              defaultValue="Education"
+              placeholder="Education, Bills, Health etc"
+              defaultValue=""
             />
           </div>
         </div>
@@ -94,7 +94,7 @@ const AddCardForm: React.FC = () => {
                 name="fullName"
                 id="fullName"
                 placeholder="500"
-                defaultValue="500"
+                defaultValue=""
               />
             </div>
           </div>
@@ -125,11 +125,30 @@ const AddCardForm: React.FC = () => {
                 name="fullName"
                 id="fullName"
                 placeholder="500"
-                defaultValue="500"
+                defaultValue=""
               />
             </div>
           </div>
+          
         </div>
+        <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
+        <div className="w-full sm:w-1/2">
+        <label
+              className="mb-3 block text-sm font-medium text-black dark:text-white"
+              htmlFor="phoneNumber"
+            >
+              Merchant Name
+            </label>
+            <input
+              className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+              type="text"
+              name="merchantname"
+              id="merchantname"
+              placeholder="Netflix, Amazon etc"
+              defaultValue=""
+            />
+          </div>
+          </div>
 
         <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
           <div className="w-full sm:w-1/2">
