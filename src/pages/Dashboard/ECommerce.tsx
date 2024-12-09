@@ -7,15 +7,24 @@ import ChatCard from '../../components/Chat/ChatCard';
 import MapOne from '../../components/Maps/MapOne';
 import TableOne from '../../components/Tables/TableOne';
 import data from '../../assets/data.json';
+import BrandOne from "../../images/brand/brand-01.svg"
+import BrandTwo from '../../images/brand/brand-02.svg';
+import BrandThree from '../../images/brand/brand-03.svg';
+import BrandFour from '../../images/brand/brand-04.svg';
+import BrandFive from '../../images/brand/brand-05.svg';
 
 type SeriesData = {
   [key: string]: number[];
 };
 
+type CategoriesData = {
+  [key: string]: string[];
+};
+
 const ECommerce: React.FC = () => {
   const [totals, setTotals] = useState<{ [key: string]: number }>({});
-  const [selectedCard, setSelectedCard] = useState<string | null>(null);
-
+  const [selectedCard2, setSelectedCard2] = useState<string>("");
+  const [selectedCard3, setSelectedCard3] = useState<string>("");
   useEffect(() => {
     if (Array.isArray(data.data)) {
       setTotals(calculateTotals(data.data));
@@ -24,35 +33,225 @@ const ECommerce: React.FC = () => {
 
   const calculateTotals = (data: any[]) => {
     return data.reduce((totals: { [key: string]: number }, item: any) => {
-      if (!totals[item.transactionNarrative]) {
-        totals[item.transactionNarrative] = 0;
+      if (!totals[item.category.merchantCategory1Name]) {
+        totals[item.category.merchantCategory1Name] = 0;
       }
-      totals[item.transactionNarrative] += item.amount;
+      totals[item.category.merchantCategory1Name] += item.amount;
       return totals;
     }, {});
   };
 
-  // Define series data for each card
-  const seriesData: SeriesData = {
-    Bills: [10, 20, 30, 40], // Example data
-    Education: [15, 25, 35, 45], // Example data
-    Health: [20, 30, 40, 50], // Example data
-    Fitness: [5, 15, 25, 35], // Example data
+  const brandData: { [key: string]: any[] } = {
+    Bills: [
+      {
+        logo: BrandOne,
+        merchantName: "Electricity Provider1",
+        amount: 450.70,
+        date: "6-07-2024",
+        carbonEmission: 123.57,
+        transactionType: "Bills",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Health Insurance",
+        amount: 150.70,
+        date: "9-01-2022",
+        carbonEmission: 13.57,
+        transactionType: "Bills",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Investment company",
+        amount: 950.70,
+        date: "17-02-2024",
+        carbonEmission: 50.57,
+        transactionType: "Bills",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Phone Company",
+        amount: 450.80,
+        date: "13-03-2024",
+        carbonEmission: 15.5,
+        transactionType: "Bills",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Grocery Store",
+        amount: 2400.70,
+        date: "04-06-2024",
+        carbonEmission: 19.57,
+        transactionType: "Bills",
+      }
+    ],
+    Entertainment: [
+      {
+        logo: BrandOne,
+        merchantName: "Clothing Store",
+        amount: 450.70,
+        date: "24-07-2024",
+        carbonEmission: 3.57,
+        transactionType: "Entertainment",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Restaurant",
+        amount: 650.70,
+        date: "24-07-2024",
+        carbonEmission: 30.57,
+        transactionType: "Entertainment",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Gym",
+        amount: 950.70,
+        date: "24-07-2024",
+        carbonEmission: 90.57,
+        transactionType: "Entertainment",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Streaming Services",
+        amount: 556,
+        date: "24-07-2024",
+        carbonEmission: 78.57,
+        transactionType: "Entertainment",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "NightOut",
+        amount: 350.70,
+        date: "24-07-2024",
+        carbonEmission: 89.57,
+        transactionType: "Entertainment",
+      }
+    ],
+    Education: [
+      {
+        logo: BrandOne,
+        merchantName: "School",
+        amount: 100.70,
+        date: "28-07-2024",
+        carbonEmission: 23.57,
+        transactionType: "Education",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Education Provider",
+        amount: 250.70,
+        date: "16-07-2024",
+        carbonEmission: 70.57,
+        transactionType: "Education",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "BookStore",
+        amount: 1500,
+        date: "24-07-2024",
+        carbonEmission: 65.57,
+        transactionType: "Education",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Tution Center",
+        amount: 2740,
+        date: "4-07-2024",
+        carbonEmission: 40.57,
+        transactionType: "Education",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Online Learning Platform",
+        amount: 9000,
+        date: "8-07-2024",
+        carbonEmission: 23.57,
+        transactionType: "Education",
+      }
+    ],
+    Health: [
+      {
+        logo: BrandOne,
+        merchantName: "Clinic",
+        amount: 2150.70,
+        date: "14-07-2024",
+        carbonEmission: 12.97,
+        transactionType: "Health",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Insurance Company",
+        amount: 3950.70,
+        date: "21-03-2024",
+        carbonEmission: 63.47,
+        transactionType: "Health",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Pharmacy",
+        amount: 4150.70,
+        date: "8-07-2024",
+        carbonEmission: 45,
+        transactionType: "Health",
+      },
+      {
+        logo: BrandOne,
+        merchantName: "Hospital",
+        amount: 150.70,
+        date: "9-03-2024",
+        carbonEmission: 8.57,
+        transactionType: "Health",
+      }
+    ],
   };
 
+  // Define series data for each card
+  const seriesData2: SeriesData = {
+    Bills: [60, 40], // Example data
+    Entertainment: [25, 75], // Example data
+    Education: [20, 30, 40, 50], // Example data
+    Health: [5, 15, 25, 35], // Example data
+  };
+
+  const seriesData3: SeriesData = {
+    Bills: [30, 10, 20, 40], // Example data
+    Entertainment: [25, 25, 35, 15], // Example data
+    Education: [30, 20, 40, 10], // Example data
+    Health: [35, 25, 20] // Example data
+  };
+
+  const merchantcategories2: CategoriesData ={
+    Bills: ["Utilities", "Equity"],
+    Entertainment: ["LifeStyle", "NightLife"], 
+    Education: ["Learning", "Professional Development", "Training", "Tutoring"], // Example data
+    Health: ["HealthCare", "Health Insurance", "Medical Checkups", "Prevention Care"], // Example data
+  }
+  const merchantcategories3: CategoriesData ={
+    Bills: ["Water", "Internet", "Electricity bill", "Rent"],
+    Entertainment: ["Gym", "Dining", "Streaming", "Apparel"], 
+    Education: ["Online Courses", "Books", "School Fee", "Tution Fee"], // Example data
+    Health: ["Medicines", "Hospital bill", "Doctor fee"], // Example data
+  }
+
   const handleCardClick = (title: string) => {
-    setSelectedCard(title);
+    setSelectedCard2(title);
+    setSelectedCard3(title)
   };
 
   // Ensure `selectedCard` is a valid key in `seriesData`
-  const selectedSeriesData = selectedCard ? seriesData[selectedCard as keyof SeriesData] : undefined;
+  const selectedSeriesData2 = selectedCard2
+    ? seriesData2[selectedCard2 as keyof SeriesData]
+    : undefined;
+  const selectedSeriesData3 = selectedCard3
+    ? seriesData3[selectedCard3 as keyof SeriesData]
+    : undefined;
+  
 
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-      <CardDataStats
+        <CardDataStats
           title="Bills"
-          total={`$${(totals.Bills || 0).toFixed(2)}K`}
+          total={`£${(totals.Bills || 0).toFixed(2)}K`}
           rate="0.43%"
           levelUp
           onClick={() => handleCardClick('Bills')}
@@ -76,11 +275,11 @@ const ECommerce: React.FC = () => {
           </svg>
         </CardDataStats>
         <CardDataStats
-          title="Education"
-          total={`$${(totals.Education || 0).toFixed(2)}K`}
+          title="Entertainment"
+          total={`£${(totals.Entertainment || 0).toFixed(2)}K`}
           rate="4.35%"
           levelUp
-          onClick={() => handleCardClick('Education')}
+          onClick={() => handleCardClick('Entertainment')}
         >
           <svg
             className="fill-primary dark:fill-white"
@@ -105,11 +304,11 @@ const ECommerce: React.FC = () => {
           </svg>
         </CardDataStats>
         <CardDataStats
-          title="Health"
-          total={`$${(totals.Health || 0).toFixed(2)}K`}
+          title="Education"
+          total={`£${(totals.Education|| 0).toFixed(2)}K`}
           rate="2.59%"
           levelUp
-          onClick={() => handleCardClick('Health')}
+          onClick={() => handleCardClick('Education')}
         >
           <svg
             className="fill-primary dark:fill-white"
@@ -130,11 +329,11 @@ const ECommerce: React.FC = () => {
           </svg>
         </CardDataStats>
         <CardDataStats
-          title="Fitness"
-          total={`$${(totals.Fitness || 0).toFixed(2)}K`}
+          title="Health"
+          total={`£${(totals.Health || 0).toFixed(2)}K`}
           rate="0.95%"
           levelDown
-          onClick={() => handleCardClick('Fitness')}
+          onClick={() => handleCardClick('Health')}
         >
           <svg
             className="fill-primary dark:fill-white"
@@ -161,16 +360,15 @@ const ECommerce: React.FC = () => {
       </div>
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        {selectedSeriesData && (
-          <ChartThree data={selectedSeriesData} />
-        )}
-        <ChartOne />
-        <ChartTwo />
-        <MapOne />
-        <div className="col-span-12 xl:col-span-8">
-          <TableOne />
+       
+        <div className="col-span-8 xl:col-span-8">
+          {(selectedSeriesData2 && selectedSeriesData3) ? <ChartThree data2={selectedSeriesData2} data3={selectedSeriesData3} selectedCard = {selectedCard2} category2={merchantcategories2[selectedCard2]} category3={merchantcategories3[selectedCard3]} /> : <ChatCard />}
         </div>
-        <ChatCard />
+        <ChatCard/>
+        <div className="col-span-8 xl:col-span-12">
+          <TableOne brandData={brandData[selectedCard2] || []} showButton= {false} onClick={()=>{}}/>
+        </div>
+        
       </div>
     </>
   );

@@ -9,59 +9,59 @@ import UserFive from '../../images/user/user-05.png';
 const chatData: Chat[] = [
   {
     avatar: UserOne,
-    name: 'Devid Heilo',
-    text: 'How are you?',
+    name: 'Learning',
+    text: 'Get upto 25% off on IELTS coaching!!!',
     time: 12,
     textCount: 3,
     color: '#10B981',
   },
   {
-    avatar: UserTwo,
-    name: 'Henry Fisher',
-    text: 'Waiting for you!',
+    avatar: UserOne,
+    name: 'Streaming Service',
+    text: "Hey, we're waiting for you. Get upto 10% off on first Netflix Subscription",
     time: 12,
     textCount: 0,
     color: '#DC3545',
   },
   {
-    avatar: UserFour,
-    name: 'Jhon Doe',
-    text: "What's up?",
+    avatar: UserOne,
+    name: 'Health Checkup',
+    text: "Get upto 20% off on first medical checkup",
     time: 32,
     textCount: 0,
     color: '#10B981',
-  },
-  {
-    avatar: UserFive,
-    name: 'Jane Doe',
-    text: 'Great',
-    time: 32,
-    textCount: 2,
-    color: '#FFBA00',
   },
   {
     avatar: UserOne,
-    name: 'Jhon Doe',
-    text: 'How are you?',
+    name: 'Electricity Bill',
+    text: 'Get upto 10£ cashback on your first bill payment',
     time: 32,
-    textCount: 0,
-    color: '#10B981',
-  },
-  {
-    avatar: UserThree,
-    name: 'Jhon Doe',
-    text: 'How are you?',
-    time: 32,
-    textCount: 3,
+    textCount: 2,
     color: '#FFBA00',
-  },
+  }
+  // {
+  //   avatar: UserOne,
+  //   name: 'Jhon Doe',
+  //   text: 'How are you?',
+  //   time: 32,
+  //   textCount: 0,
+  //   color: '#10B981',
+  // },
+  // {
+  //   avatar: UserThree,
+  //   name: 'Jhon Doe',
+  //   text: 'How are you?',
+  //   time: 32,
+  //   textCount: 3,
+  //   color: '#FFBA00',
+  // },
 ];
 
 const ChatCard = () => {
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
       <h4 className="mb-6 px-7.5 text-xl font-semibold text-black dark:text-white">
-        Chats
+       Offers
       </h4>
 
       <div>

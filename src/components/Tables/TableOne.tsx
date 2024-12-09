@@ -5,55 +5,15 @@ import BrandThree from '../../images/brand/brand-03.svg';
 import BrandFour from '../../images/brand/brand-04.svg';
 import BrandFive from '../../images/brand/brand-05.svg';
 
-const brandData: BRAND[] = [
-  {
-    logo: BrandOne,
-    name: 'Google',
-    visitors: 3.5,
-    revenues: '5,768',
-    sales: 590,
-    conversion: 4.8,
-    category: 'cat-1'
-  },
-  {
-    logo: BrandTwo,
-    name: 'Twitter',
-    visitors: 2.2,
-    revenues: '4,635',
-    sales: 467,
-    conversion: 4.3,
-    category: 'cat-2'
-  },
-  {
-    logo: BrandThree,
-    name: 'Github',
-    visitors: 2.1,
-    revenues: '4,290',
-    sales: 420,
-    conversion: 3.7,
-    category: 'cat-3'
-  },
-  {
-    logo: BrandFour,
-    name: 'Vimeo',
-    visitors: 1.5,
-    revenues: '3,580',
-    sales: 389,
-    conversion: 2.5,
-    category: 'cat-4'
-  },
-  {
-    logo: BrandFive,
-    name: 'Facebook',
-    visitors: 3.5,
-    revenues: '6,768',
-    sales: 390,
-    conversion: 4.2,
-    category: 'cat-5'
-  },
-];
+import React from 'react';
 
-const TableOne = () => {
+interface TableOneProps {
+  brandData: BRAND[];
+  showButton: boolean;
+  onClick: () => void;
+}
+
+const TableOne: React.FC<TableOneProps> = ({ brandData, showButton, onClick }) => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
@@ -64,7 +24,7 @@ const TableOne = () => {
         <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-6">
           <div className="p-2.5 xl:p-3">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Transaction
+              Merchant
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-3">
@@ -74,24 +34,25 @@ const TableOne = () => {
           </div>
           <div className="p-2.5 text-center xl:p-3">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Status
+              Transaction Date
             </h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-3">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Date
+              Co2 Emission
             </h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-3">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Channel
+              Transaction type
             </h5>
           </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-3">
+          {/* <div className="hidden p-2.5 text-center sm:block xl:p-3">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
               Category
             </h5>
-          </div>
+          </div> */}
+          {showButton && <div className="hidden p-2.5 text-center sm:block xl:p-3" />}
         </div>
 
         {brandData.map((brand, key) => (
@@ -108,29 +69,35 @@ const TableOne = () => {
                 <img src={brand.logo} alt="Brand" />
               </div>
               <p className="hidden text-black dark:text-white sm:block">
-                {brand.name}
+                {brand.merchantName}
               </p>
             </div>
-
             <div className="flex items-center justify-center p-1.5 xl:p-3">
-              <p className="text-black dark:text-white">{brand.visitors}K</p>
-            </div>
-
-            <div className="flex items-center justify-center p-1.5 xl:p-3">
-              <p className="text-meta-3">${brand.revenues}</p>
+              <p className="text-meta-3">{brand.amount}</p>
             </div>
 
             <div className="hidden items-center justify-center p-1.5 sm:flex xl:p-3">
-              <p className="text-black dark:text-white">{brand.sales}</p>
+              <p className="text-black dark:text-white">{brand.date}</p>
             </div>
 
             <div className="hidden items-center justify-center p-1.5 sm:flex xl:p-3">
-              <p className="text-meta-5">{brand.conversion}%</p>
+              <p className="text-meta-5">{brand.carbonEmission}%</p>
             </div>
 
             <div className="hidden items-center justify-center p-1.5 sm:flex xl:p-3">
-              <p className="text-meta-5">{brand.category}</p>
+              <p className="text-meta-5">{brand.transactionType}</p>
             </div>
+
+            {showButton && (
+              <div className="hidden items-center justify-center p-1.5 sm:flex xl:p-3">
+              <button
+              className="self-start px-4 py-2 bg-blue-600 text-white rounded mt-16"
+              onClick={onClick}
+            >
+              Add Card
+            </button>
+            </div>
+            )}
           </div>
         ))}
       </div>
